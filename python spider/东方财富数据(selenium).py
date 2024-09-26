@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 import time
 import random
 import csv
+from schedule import every, run_pending, repeat
 
 
 class Spider(object):
@@ -55,6 +56,7 @@ class Spider(object):
             writer = csv.DictWriter(f, fieldnames=self.headers)
             writer.writerows(datas)
 
+    @repeat(every().day.at("12:00"))
     def run(self):
         self.open_csv()
         url = self.url
@@ -77,7 +79,9 @@ class Spider(object):
 if __name__ == '__main__':
     spider = Spider()
     spider.run()
-
+    while True:
+        run_pending()
+        time.sleep(1)
 
 
 
