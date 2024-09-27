@@ -8,11 +8,19 @@ from schedule import every, run_pending, repeat
 
 class Spider(object):
     def __init__(self):
-        options = webdriver.FirefoxOptions()
+        options = webdriver.ChromeOptions()
         options.add_argument('--headless')
-        options.binary_location = r"C:\Program Files\Mozilla Firefox\firefox.exe"
+        options.binary_location = r"D:\Bertram Rowen\texts\code\python spider\Win_x64_1137693_chrome-win\chrome-win\chrome.exe"
         self.url = 'https://data.eastmoney.com/bbsj/202206/lrb.html'
-        self.browser = webdriver.Firefox(options=options)
+        self.browser = webdriver.Chrome(options=options)
+        options.add_argument("--disable-extensions")
+        options.add_argument("--headless")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--disable-software-rasterizer")
+        options.add_argument('--no-sandbox')
+        options.add_argument('--ignore-certificate-errors')
+        options.add_argument('--allow-running-insecure-content')
+        options.add_argument("blink-settings=imagesEnabled=false")
         self.i = 0
         self.faliure = 0
         self.headers = ['股票简称', '股票代码', '净利润', '利润同比', '营业总收入', '营业总收入同比', '营业支出', '销售费用', '管理费用', '财务费用', '营业总支出', '营业利润', '利润总额']
